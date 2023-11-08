@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Champion Picker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .champion {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      border: 2px solid black;
+      text-align: center;
+      line-height: 100px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>Champion Picker</h1>
+  <div id="champion-list">
+    <script>
+      const champions = ["Aatrox", "Ahri", "Akali", "Alistar", "Amumu", "Anivia", "Annie", "Aphelios", "Ashe", "A Sol", "Azir", "Bard", "Blitzcrank", "Brand", "Braum", "Caitlyn", "Camille", "Cassiopeia", "Cho'Gath", "Corki", "Darius", "Diana", "Dr. Mundo", "Draven", "Ekko", "Elise", "Evelynn", "Ezreal", "Fiddle", "Fiora", "Fizz", "Galio", "Gangplank", "Garen", "Gnar", "Gragas", "Graves", "Hecarim", "Heimer", "Illaoi", "Irelia", "Ivern", "Janna", "Jarvan IV", "Jax", "Jayce", "Jhin", "Jinx", "Kai'Sa", "Kalista", "Karma", "Karthus", "Kassadin", "Katarina", "Kayle", "Kayn", "Kennen", "Kha'Zix", "Kindred", "Kled", "Kog'Maw", "LeBlanc", "Lee Sin", "Leona", "Lillia", "Lissandra", "Lucian", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "Master Yi", "MF", "Morde", "Morgana", "Nami", "Nasus", "Nautilus", "Neeko", "Nidalee", "Nocturne", "Nunu", "Olaf", "Orianna", "Ornn", "Pantheon", "Poppy", "Pyke", "Qiyana", "Quinn", "Rakan", "Rammus", "Rek'Sai", "Rell", "Renekton", "Rengar", "Riven", "Rumble", "Ryze", "Samira", "Sejuani", "Senna", "Seraphine", "Sett", "Shaco", "Shen", "Shyvana", "Singed", "Sion", "Sivir", "Skarner", "Sona", "Soraka", "Swain", "Sylas", "Syndra", "Tahm", "Taliyah", "Talon", "Taric", "Teemo", "Thresh", "Tristana", "Trundle", "Trynd", "TF", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Veigar", "Vel'Koz", "Vi", "Viktor", "Vladimir", "Volibear", "Warwick", "Wukong", "Xayah", "Xerath", "Xin Zhao", "Yasuo", "Yone", "Yorick", "Yuumi", "Zac", "Zed", "Ziggs", "Zilean", "Zoe", "Zyra"];
+
+      const selectedChampions = [];
+
+      function selectChampion(champion) {
+        if (selectedChampions.includes(champion)) {
+          const index = selectedChampions.indexOf(champion);
+          selectedChampions.splice(index, 1);
+          championElement.classList.remove("selected");
+        } else if (selectedChampions.length < 5) {
+          selectedChampions.push(champion);
+          championElement.classList.add("selected");
+        }
+        updateChampionList();
+      }
+
+      const championListElement = document.getElementById("champion-list");
+      for (let i = 0; i < champions.length; i++) {
+        const champion = champions[i];
+        const championElement = document.createElement("div");
+        championElement.classList.add("champion");
+        championElement.textContent = champion;
+        championElement.addEventListener("click", function() {
+          selectChampion(champion);
+        });
+        championListElement.appendChild(championElement);
+      }
+
+      function updateChampionList() {
+        const chosenChampionsElement = document.getElementById("chosen-champions");
+        chosenChampionsElement.innerHTML = "";
+        for (let i = 0; i < selectedChampions.length; i++) {
+          const champion = selectedChampions[i];
+          const championElement = document.createElement("div");
+          championElement.classList.add("champion");
+          championElement.classList.add("selected");
+          championElement.textContent = champion;
+          chosenChampionsElement.appendChild(championElement);
+        }
+      }
+    </script>
+  </div>
+  <div>
+    <h2>Your chosen champions:</h2>
+    <div id="chosen-champions"></div>
+  </div>
+</body>
+</html>
